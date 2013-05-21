@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>Video</title>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/hot-sneaks/jquery-ui.css" type="text/css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" charset="utf-8"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+
+
+
+<body>
+
+
+
+
+
+
+<!--START JQuery sliders-->
+<div id="graphicEqBox">
+  <video id="video1" width="320" height="240" controls>
+<source src="test.mov" type="video">
+</video>
+<div class="eq" id="filter80Hz"></div> 
+<div class="eq" id="filter240Hz"></div> 
+<div class="eq" id="filter750Hz"></div> 
+<div class="eq" id="filter2200Hz"></div> 
+<div class="eq" id="filter6000Hz"></div> 
+</div>
+<!--END JQuery sliders-->
+
+</body>
+
+<style>
+
+
+
+
+#graphicEqBox {
+        position:relative;
+        top:100px;
+        margin: 0 auto;
+        width:300px;
+        border: 0px solid gray;
+
+    }
+
+
+.eq {
+        display: inline-block;
+        padding: 0.9em;
+        border: 2px solid orange;
+    }
+
+    #video1{position:relative;
+
+        left:-30px;
+        padding: 0.9em;
+        border: 2px solid orange;
+}
+
+</style>
+
+<script>
+
+
+
+
+var context = new webkitAudioContext();
+
+
+
+
+
+
+
+
+
+var video1 = document.getElementById("video1");
+video1.setAttribute("src", "test.mov");
+
+video1.controls = true;
+video1.autoplay = true;
+
+
+
+
+var context = new webkitAudioContext();
+var gainNode = context.createGainNode();
+gainNode.gain.value = 1;                   // Change Gain Value to test
+
+filter1 = context.createBiquadFilter();
+filter1.type = 5;    
+filter1.gain.value = null;    
+filter1.Q.value = 1;                  // Change Filter type to test
+filter1.frequency.value = 80;            // Change frequency to test
+
+filter2 = context.createBiquadFilter();
+filter2.type = 5;    
+filter2.gain.value = 0;    
+filter2.Q.value = 1;                  // Change Filter type to test
+filter2.frequency.value = 240;            // Change frequency to test
+
+filter3 = context.createBiquadFilter();
+filter3.type = 5;    
+filter3.gain.value = 0;    
+filter3.Q.value = 1;                  // Change Filter type to test
+filter3.frequency.value = 750;            // Change frequency to test
+
+filter4 = context.createBiquadFilter();
+filter4.type = 5;    
+filter4.gain.value = 0;    
+filter4.Q.value = 1;                  // Change Filter type to test
+filter4.frequency.value = 2200;            // Change frequency to test
+
+filter5 = context.createBiquadFilter();
+filter5.type = 5;    
+filter5.gain.value = 0;    
+filter5.Q.value = 1;                  // Change Filter type to test
+filter5.frequency.value = 6000;            // Change frequency to test
+
+
+
+
+// Wait for window.onload to fire. See crbug.com/112368
+window.addEventListener('load', function(e) {
+  // Our <video> element will be the audio source.
+  var source = context.createMediaElementSource(video1);
+  source.connect(gainNode);
+  gainNode.connect(filter1);
+  filter1.connect(filter2);
+  filter2.connect(filter3);
+  filter3.connect(filter4);
+  filter4.connect(filter5);
+  filter5.connect(context.destination)
+
+
+
+}, false);
+
+$(function() {
+    
+ 
+     var sliderParams80Hz = {
+        'orientation': "vertical",
+        'range': "min",
+        'min': -30,
+        'max': 30,
+        'animate': true,
+        'step': 0.01,
+        'slide': function(event, ui) {  
+            window.filter1.gain.value = ui.value;
+
+         },
+        'stop': function(event, ui) {
+            console.log(window.filter1.gain.value);
+        }
+      };
+
+    $('#filter80Hz').slider(sliderParams80Hz);
+
+
+
+
+
+
+     var sliderParams240Hz = {
+        'orientation': "vertical",
+        'range': "min",
+        'min': -30,
+        'max': 30,
+        'animate': true,
+        'step': 0.01,
+        'slide': function(event, ui) {  
+            window.filter2.gain.value = ui.value;
+     
+         },
+        'stop': function(event, ui) {
+            console.log(window.filter2.gain.value);
+        }
+      };
+
+    $('#filter240Hz').slider(sliderParams240Hz);
+
+
+
+
+
+
+
+     var sliderParams750Hz = {
+        'orientation': "vertical",
+        'range': "min",
+        'min': -30,
+        'max': 30,
+        'animate': true,
+        'step': 0.01,
+        'slide': function(event, ui) {  
+            window.filter3.gain.value = ui.value;
+
+         },
+        'stop': function(event, ui) {
+            console.log(window.filter3.gain.value);
+        }
+      };
+
+    $('#filter750Hz').slider(sliderParams750Hz);
+
+
+
+     var sliderParams2200Hz = {
+        'orientation': "vertical",
+        'range': "min",
+        'min': -30,
+        'max': 30,
+        'animate': true,
+        'step': 0.01,
+        'slide': function(event, ui) {  
+            window.filter4.gain.value = ui.value;
+
+         },
+        'stop': function(event, ui) {
+            console.log(window.filter4.gain.value);
+        }
+      };
+
+    $('#filter2200Hz').slider(sliderParams2200Hz);
+
+
+
+
+     var sliderParams6000Hz = {
+        'orientation': "vertical",
+        'range': "min",
+        'min': -30,
+        'max': 30,
+        'animate': true,
+        'step': 0.01,
+        'slide': function(event, ui) {  
+            window.filter5.gain.value = ui.value;
+
+         },
+        'stop': function(event, ui) {
+            console.log(window.filter5.gain.value);
+        }
+      };
+
+    $('#filter6000Hz').slider(sliderParams6000Hz);
+
+
+
+
+
+});
+</script>
