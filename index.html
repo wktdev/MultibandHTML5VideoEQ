@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/hot-sneaks/jquery-ui.css" type="text/css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" charset="utf-8"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
 
 
@@ -67,11 +67,11 @@
 
 
 
-var context = new webkitAudioContext();
+var context = new AudioContext();
 
 
 
-
+$(function() {
 
 
 
@@ -87,35 +87,35 @@ video1.autoplay = true;
 
 
 var context = new webkitAudioContext();
-var gainNode = context.createGainNode();
+var gainNode = context.createGain();
 gainNode.gain.value = 1;                   // Change Gain Value to test
 
 filter1 = context.createBiquadFilter();
-filter1.type = 5;    
+filter1.type = "peaking";    
 filter1.gain.value = null;    
 filter1.Q.value = 1;                  // Change Filter type to test
 filter1.frequency.value = 80;            // Change frequency to test
 
 filter2 = context.createBiquadFilter();
-filter2.type = 5;    
+filter2.type = "peaking";    
 filter2.gain.value = 0;    
 filter2.Q.value = 1;                  // Change Filter type to test
 filter2.frequency.value = 240;            // Change frequency to test
 
 filter3 = context.createBiquadFilter();
-filter3.type = 5;    
+filter3.type = "peaking";    
 filter3.gain.value = 0;    
 filter3.Q.value = 1;                  // Change Filter type to test
 filter3.frequency.value = 750;            // Change frequency to test
 
 filter4 = context.createBiquadFilter();
-filter4.type = 5;    
+filter4.type = "peaking";    
 filter4.gain.value = 0;    
 filter4.Q.value = 1;                  // Change Filter type to test
 filter4.frequency.value = 2200;            // Change frequency to test
 
 filter5 = context.createBiquadFilter();
-filter5.type = 5;    
+filter5.type = "peaking";    
 filter5.gain.value = 0;    
 filter5.Q.value = 1;                  // Change Filter type to test
 filter5.frequency.value = 6000;            // Change frequency to test
@@ -139,7 +139,7 @@ window.addEventListener('load', function(e) {
 
 }, false);
 
-$(function() {
+
     
  
      var sliderParams80Hz = {
